@@ -846,6 +846,18 @@ pub(crate) mod deprecated {
                 }
             }
 
+            #[cfg(target_arch = "arm")]
+            #[allow(deprecated)]
+            impl<T: CoordNum, E> TryMapCoordsInplace<T, E> for $geom<T> {
+                fn try_map_coords_inplace(
+                    &mut self,
+                    func: impl Fn((T, T)) -> Result<(T, T), E>,
+                ) -> Result<(), E> {
+                    unimplemented!("try_map_coords_inplace causes armv7 to overflow for some reason.")
+                }
+            }
+
+            #[cfg(not(target_arch = "arm"))]
             #[allow(deprecated)]
             impl<T: CoordNum, E> TryMapCoordsInplace<T, E> for $geom<T> {
                 fn try_map_coords_inplace(
