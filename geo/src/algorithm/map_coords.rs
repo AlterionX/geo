@@ -864,7 +864,7 @@ pub(crate) mod deprecated {
                     &mut self,
                     func: impl Fn((T, T)) -> Result<(T, T), E>,
                 ) -> Result<(), E> {
-                    MapCoordsInPlace::try_map_coords_in_place(self, |c| Ok(func(c.x_y())?.into()))
+                    unimplemented!("try_map_coords_inplace causes rustc to overflow for some reason.")
                 }
             }
 
